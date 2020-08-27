@@ -10,9 +10,37 @@ class BSTSet : public Set
 public:
 	BSTSet() { root = nullptr; }
 
-	BSTSet(const BSTSet& s);
+	~BSTSet() { erase(); }
 
-	~BSTSet();
+	BSTSet(const BSTSet& s) { copy(s); }
+	BSTSet(BSTSet&& s) noexcept : root(s.root)
+	{
+		n = s.n;
+
+		s.n = 0;
+		s.root = nullptr;
+	}
+
+	BSTSet& operator=(const BSTSet& s)
+	{
+		erase();
+
+		copy(s);
+
+		return *this;
+	}
+	BSTSet& operator=(BSTSet&& s) noexcept
+	{
+		erase();
+
+		n = s.n;
+		root = s.root;
+
+		s.n = 0;
+		s.root = nullptr;
+
+		return *this;
+	}
 
 	bool member(int k) const override
 	{
@@ -40,6 +68,9 @@ private:
 	Node* root;
 	Node* search(int k) const;
 	Node* handler(Node* p);
+
+	void copy(const BSTSet& s);
+	void erase();
 };
 
 #endif

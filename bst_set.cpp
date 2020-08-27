@@ -2,7 +2,7 @@
 #include "stack.h"
 #include "exceptions.h"
 
-BSTSet::BSTSet(const BSTSet& s)
+void BSTSet::copy(const BSTSet& s)
 {
 	root = nullptr; n = s.n;
 	Stack<Node*> stack, helper;
@@ -40,7 +40,7 @@ BSTSet::BSTSet(const BSTSet& s)
 	}
 }
 
-BSTSet::~BSTSet()
+void BSTSet::erase()
 {
 	Stack<Node*> stack;
 	Node* p = root;

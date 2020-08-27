@@ -1,8 +1,6 @@
 #ifndef _STACK_H_
 #define _STACK_H_
 
-#include <utility>
-
 #include "exceptions.h"
 
 template<typename T>
@@ -52,7 +50,7 @@ private:
 };
 
 template<typename T>
-inline Stack<T>::~Stack()
+Stack<T>::~Stack()
 {
 	while (top)
 	{

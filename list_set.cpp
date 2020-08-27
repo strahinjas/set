@@ -1,7 +1,7 @@
 #include "list_set.h"
 #include "exceptions.h"
 
-ListSet::ListSet(const ListSet& s)
+void ListSet::copy(const ListSet& s)
 {
 	n = s.n;
 	head = tail = nullptr;
@@ -10,7 +10,7 @@ ListSet::ListSet(const ListSet& s)
 		tail = (head ? tail->next : head) = new Element(e->info, tail);
 }
 
-ListSet::~ListSet()
+void ListSet::erase()
 {
 	while (head)
 	{
@@ -18,6 +18,8 @@ ListSet::~ListSet()
 		head = head->next;
 		delete e;
 	}
+
+	n = 0;
 	tail = nullptr;
 }
 

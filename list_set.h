@@ -13,9 +13,38 @@ public:
 		head = tail = nullptr;
 	}
 
-	ListSet(const ListSet& s);
+	~ListSet() { erase(); }
 
-	~ListSet();
+	ListSet(const ListSet& s) { copy(s); }
+	ListSet(ListSet&& s) noexcept : head(s.head), tail(s.tail)
+	{
+		n = s.n;
+
+		s.n = 0;
+		s.head = s.tail = nullptr;
+	}
+
+	ListSet& operator=(const ListSet& s)
+	{
+		erase();
+
+		copy(s);
+
+		return *this;
+	}
+	ListSet& operator=(ListSet&& s) noexcept
+	{
+		erase();
+
+		n = s.n;
+		head = s.head;
+		tail = s.tail;
+
+		s.n = 0;
+		s.head = s.tail = nullptr;
+
+		return *this;
+	}
 
 	bool member(int k) const override;
 
@@ -39,6 +68,9 @@ private:
 
 	Element* head;
 	Element* tail;
+
+	void copy(const ListSet& s);
+	void erase();
 };
 
 #endif

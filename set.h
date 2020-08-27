@@ -4,7 +4,7 @@
 class Set
 {
 public:
-	virtual ~Set() { }
+	virtual ~Set() {}
 
 	virtual bool member(int k) const = 0;
 	virtual Set& operator+=(int k) = 0;
